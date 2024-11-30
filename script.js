@@ -91,6 +91,14 @@ function toggleOperand() {
     currentOperand = currentOperand === 1 ? 2 : 1;
 }
 
+function resetCurrentOperand() {
+    currentOperand = 1;
+}
+
+function resetOperand1() {
+    operand1 = null;
+}
+
 function resetOperand2() {
     operand2 = null;
 }
@@ -144,4 +152,14 @@ equalButton.addEventListener("click", () => {
     }
 
     calculateAndShowResult();
+});
+
+const clearButton = document.querySelector(".clear");
+clearButton.addEventListener("click", (event) => {
+    resetDisplayText();
+    resetOperator();
+    resetOperand1();
+    resetOperand2();
+    resetCurrentOperand();
+    showDisplayText();
 });

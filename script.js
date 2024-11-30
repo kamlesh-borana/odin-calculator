@@ -11,6 +11,9 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+    if(b === 0) {
+        return "Error"
+    }
     return a / b;
 }
 
@@ -46,7 +49,7 @@ function showDisplayText() {
 }
 
 function updateDisplayText(text) {
-    if(displayText === "0") {
+    if(displayText === "0" || displayText === "Error") {
         displayText = text;
     } else if(text === "." && displayText.includes(".")) {
         return;

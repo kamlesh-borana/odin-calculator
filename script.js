@@ -17,6 +17,10 @@ function divide(a, b) {
     return a / b;
 }
 
+function percentage(a) {
+    return a / 100;
+}
+
 function operate(operator, operand1, operand2) {
     switch(operator) {
         case "+":
@@ -30,6 +34,9 @@ function operate(operator, operand1, operand2) {
 
         case "/":
             return divide(operand1, operand2);
+
+        case "%":
+            return percentage(operand1);
 
         default:
             return "Invalid Operator";
@@ -163,4 +170,18 @@ clearButton.addEventListener("click", (event) => {
     resetOperand2();
     resetCurrentOperand();
     showDisplayText();
+});
+
+const percentageButton = document.querySelector(".percentage");
+percentageButton.addEventListener("click", (event) => {
+    let operand = currentOperand === 1 ? operand1 : operand2;
+
+    if(operand != null) {
+        let result = operate(event.target.value, operand);
+        result = Number(result.toFixed(10));
+        resetDisplayText();
+        updateDisplayText(String(result));
+        updateOperand();
+        showDisplayText();
+    }
 });

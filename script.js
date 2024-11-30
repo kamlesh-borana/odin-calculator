@@ -194,3 +194,16 @@ transformButtons.forEach((button) => {
         }
     });
 });
+
+const backButton = document.querySelector(".back");
+backButton.addEventListener("click", () => {
+    let operand = currentOperand === 1 ? operand1 : operand2;
+
+    if(operand != null) {
+        operand = Math.floor(operand / 10);
+        resetDisplayText();
+        updateDisplayText(String(operand));
+        updateOperand();
+        showDisplayText();
+    }
+});

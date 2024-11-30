@@ -112,7 +112,8 @@ function resetDisplayText() {
 }
 
 function calculateAndShowResult() {
-    const result = operate(operator, operand1, operand2);
+    let result = operate(operator, operand1, operand2);
+    result = Number(result.toFixed(10));
     resetDisplayText();
     updateDisplayText(String(result));
     toggleOperand();

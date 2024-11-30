@@ -20,6 +20,8 @@
     text-align: right;
     margin-bottom: 10px;
     font-size: 28px;
+    border: 1px solid black;
+    padding: 0 5px;
 }
 
 .keys-container {
@@ -35,6 +37,6 @@
 
 .keys-row button {
     flex: 1;
-    height: 40px;
+    height: 45px;
     aspect-ratio: 1 / 1;
 }

@@ -198,7 +198,7 @@ transformButtons.forEach((button) => {
 const backButton = document.querySelector(".back");
 backButton.addEventListener("click", () => {
     if(displayText) {
-        let result = Number(displayText.slice(0, -1));
+        let result = displayText.slice(0, -1);
         resetDisplayText();
         updateDisplayText(String(result));
         updateOperand();

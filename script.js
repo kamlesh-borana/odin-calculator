@@ -63,7 +63,9 @@ function showDisplayText() {
 }
 
 function updateDisplayText(text) {
-    if(displayText === "0" || displayText === "Error") {
+    if(displayText === "0" && text === ".") {
+        displayText = displayText + text;
+    } else if(displayText === "0" || displayText === "Error") {
         displayText = text;
     } else if(text === "." && displayText.includes(".")) {
         return;

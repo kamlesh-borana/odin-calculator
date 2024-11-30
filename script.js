@@ -21,6 +21,10 @@ function percentage(a) {
     return a / 100;
 }
 
+function sign(a) {
+    return -(a);
+}
+
 function operate(operator, operand1, operand2) {
     switch(operator) {
         case "+":
@@ -37,6 +41,9 @@ function operate(operator, operand1, operand2) {
 
         case "%":
             return percentage(operand1);
+
+        case "±":
+            return sign(operand1);
 
         default:
             return "Invalid Operator";
@@ -172,16 +179,18 @@ clearButton.addEventListener("click", (event) => {
     showDisplayText();
 });
 
-const percentageButton = document.querySelector(".percentage");
-percentageButton.addEventListener("click", (event) => {
-    let operand = currentOperand === 1 ? operand1 : operand2;
+const transformButtons = document.querySelectorAll(".transform");
+transformButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+        let operand = currentOperand === 1 ? operand1 : operand2;
 
-    if(operand != null) {
-        let result = operate(event.target.value, operand);
-        result = Number(result.toFixed(10));
-        resetDisplayText();
-        updateDisplayText(String(result));
-        updateOperand();
-        showDisplayText();
-    }
+        if(operand != null) {
+            let result = operate(event.target.value, operand);
+            result = Number(result.toFixed(10));
+            resetDisplayText();
+            updateDisplayText(String(result));
+            updateOperand();
+            showDisplayText();
+        }
+    });
 });

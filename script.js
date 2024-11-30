@@ -184,7 +184,7 @@ transformButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
         let operand = currentOperand === 1 ? operand1 : operand2;
 
-        if(operand != null) {
+        if(operand != null && !isNaN(operand)) {
             let result = operate(event.target.value, operand);
             result = Number(result.toFixed(10));
             resetDisplayText();

@@ -98,6 +98,7 @@ digitButtons.forEach((button) => {
         updateDisplayText(event.target.value);
         updateOperand();
         showDisplayText();
+        event.target.blur();
     });
 });
 
@@ -144,6 +145,8 @@ function calculateAndShowResult() {
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
+        event.target.blur();
+
         if(isNaN(operand1) || isNaN(operand2)) {
             return;
         }
@@ -165,7 +168,9 @@ operatorButtons.forEach((button) => {
 });
 
 const equalButton = document.querySelector(".equal");
-equalButton.addEventListener("click", () => {
+equalButton.addEventListener("click", (event) => {
+    event.target.blur();
+
     if(!operator || (operand1 == null) || isNaN(operand1) || (operand2 == null) || isNaN(operand2) || (displayText === "")) {
         return;
     }
@@ -181,6 +186,7 @@ clearButton.addEventListener("click", (event) => {
     resetOperand2();
     resetCurrentOperand();
     showDisplayText();
+    event.target.blur();
 });
 
 const transformButtons = document.querySelectorAll(".transform");
@@ -196,11 +202,13 @@ transformButtons.forEach((button) => {
             updateOperand();
             showDisplayText();
         }
+
+        event.target.blur();
     });
 });
 
 const backButton = document.querySelector(".back");
-backButton.addEventListener("click", () => {
+backButton.addEventListener("click", (event) => {
     if(displayText) {
         let result = displayText.slice(0, -1);
         resetDisplayText();
@@ -208,6 +216,8 @@ backButton.addEventListener("click", () => {
         updateOperand();
         showDisplayText();
     }
+
+    event.target.blur();
 });
 
 document.addEventListener("keydown", (event) => {

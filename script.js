@@ -43,6 +43,8 @@ function operate(operator, operand1, operand2) {
             return percentage(operand1);
 
         case "±":
+        case "!":
+        case "_":
             return sign(operand1);
 
         default:
@@ -205,5 +207,97 @@ backButton.addEventListener("click", () => {
         updateDisplayText(String(result));
         updateOperand();
         showDisplayText();
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    const key = event.key;
+    const isShiftKeyPressed = event.shiftKey;
+    const isCtrlKeyPressed = event.ctrlKey;
+
+    switch(key) {
+        case "1":
+        case "2":
+        case "3":
+        case "4":
+        case "5":
+        case "6":
+        case "7":
+        case "8":
+        case "9":
+        case "0":
+        case ".":
+            updateDisplayText(key);
+            updateOperand();
+            showDisplayText();
+            break;
+
+        case "+":
+        case "-":
+        case "*":
+        case "/":
+            if(isNaN(operand1) || isNaN(operand2)) {
+                return;
+            }
+    
+            if(operator && displayText === "") {
+                updateOperator(key);
+                return;
+            }
+    
+            if(operator && (operand1 != null) && (operand2 != null)) {
+                calculateAndShowResult();
+            }
+    
+            updateOperator(key);
+            toggleOperand();
+            updateOperand();
+            resetDisplayText();
+            break;
+
+        case "=":
+        case "Enter":
+        case " ":
+            if(!operator || (operand1 == null) || isNaN(operand1) || (operand2 == null) || isNaN(operand2) || (displayText === "")) {
+                return;
+            }
+        
+            calculateAndShowResult();
+            break;
+
+        case "%":
+        case "!":
+        case "_":
+            let operand = currentOperand === 1 ? operand1 : operand2;
+
+            if(operand != null && !isNaN(operand)) {
+                let result = operate(key, operand);
+                result = Number(result.toFixed(10));
+                resetDisplayText();
+                updateDisplayText(String(result));
+                updateOperand();
+                showDisplayText();
+            }
+            break;
+
+        case "Backspace":
+            if(isShiftKeyPressed || isCtrlKeyPressed) {
+                resetDisplayText();
+                resetOperator();
+                resetOperand1();
+                resetOperand2();
+                resetCurrentOperand();
+                showDisplayText();
+                break;
+            }
+
+            if(displayText) {
+                let result = displayText.slice(0, -1);
+                resetDisplayText();
+                updateDisplayText(String(result));
+                updateOperand();
+                showDisplayText();
+            }
+            break;
     }
 });
